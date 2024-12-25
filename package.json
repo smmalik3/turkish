@@ -1,0 +1,30 @@
+{
+  "name": "flashcard-game",
+  "version": "1.0.0",
+  "description": "A flashcard game that displays Turkish words or images and allows users to flip the card to reveal English translations.",
+  "main": "src/pages/index.tsx",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest",
+    "@types/react": "latest",
+    "@types/node": "latest"
+  },
+  "keywords": [
+    "flashcard",
+    "game",
+    "language",
+    "turkish",
+    "english"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
