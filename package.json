@@ -9,14 +9,17 @@
     "start": "next start"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.20",
     "next": "latest",
+    "postcss": "^8.4.49",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "typescript": "latest",
+    "@types/node": "latest",
     "@types/react": "latest",
-    "@types/node": "latest"
+    "typescript": "latest"
   },
   "keywords": [
     "flashcard",

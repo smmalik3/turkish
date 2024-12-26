@@ -1,6 +1,6 @@
-# flashcard-game/flashcard-game/README.md
+# README.md
 
-# Flashcard Game
+# Turkish Flashcard Game
 
 ## Overview
 
