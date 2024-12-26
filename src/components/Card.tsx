@@ -51,6 +51,11 @@ const Card: React.FC<CardProps> = ({ language }) => {
     selectRandomWord(remainingWords);
   };
 
+  const totalWords = correctWords.length + incorrectWords.length + remainingWords.length;
+  const correctPercentage = ((correctWords.length / totalWords) * 100).toFixed(2);
+  const incorrectPercentage = ((incorrectWords.length / totalWords) * 100).toFixed(2);
+  const progressPercentage = ((remainingWords.length / totalWords) * 100).toFixed(2);
+
   return (
     <div className="card-container">
       <div className="card" onClick={handleClick}>
@@ -67,6 +72,18 @@ const Card: React.FC<CardProps> = ({ language }) => {
       </div>
       <button onClick={() => handleNextCard(true)}>Correct</button>
       <button onClick={() => handleNextCard(false)}>Incorrect</button>
+
+      <div className="stats">
+        <div className="correct">
+          Correct: {correctWords.length} / {totalWords} ({correctPercentage}%)
+        </div>
+        <div className="incorrect">
+          Incorrect: {incorrectWords.length} / {totalWords} ({incorrectPercentage}%)
+        </div>
+        <div className="progress-bar">
+          <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
+        </div>
+      </div>
     </div>
   );
 };
