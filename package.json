@@ -1,12 +1,14 @@
 {
-  "name": "flashcard-game",
+  "name": "turkish-flashcard-game",
   "version": "1.0.0",
   "description": "A flashcard game that displays Turkish words or images and allows users to flip the card to reveal English translations.",
   "main": "src/pages/index.tsx",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export",
+    "lint": "next lint"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
@@ -28,6 +30,6 @@
     "turkish",
     "english"
   ],
-  "author": "Your Name",
+  "author": "Salman Malik",
   "license": "MIT"
 }
