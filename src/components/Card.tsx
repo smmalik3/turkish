@@ -35,6 +35,9 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
       if (isPracticeMode) {
         alert('You have completed practicing the incorrect words.');
         resetApp();
+      } else if (incorrectWords.length === 0) {
+        alert('Congratulations! You got all the answers correct.');
+        resetApp();
       } else {
         const practiceIncorrect = window.confirm('Would you like to practice the words you got incorrect?');
         if (practiceIncorrect) {
