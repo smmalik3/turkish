@@ -3,22 +3,31 @@ import FlipAnimation from './FlipAnimation';
 import translations from '../utils/translations';
 
 interface CardProps {
-  language: string;
+  language: 'tr' | 'en';
+}
+
+interface Translation {
+  word: string;
+  translation: string;
+}
+
+interface Translations {
+  [key: string]: Translation[];
 }
 
 const Card: React.FC<CardProps> = ({ language }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [wordPair, setWordPair] = useState({ word: '', translation: '' });
-  const [remainingWords, setRemainingWords] = useState(translations[language]);
-  const [correctWords, setCorrectWords] = useState([]);
-  const [incorrectWords, setIncorrectWords] = useState([]);
+  const [wordPair, setWordPair] = useState<Translation>({ word: '', translation: '' });
+  const [remainingWords, setRemainingWords] = useState<Translation[]>(translations[language]);
+  const [correctWords, setCorrectWords] = useState<Translation[]>([]);
+  const [incorrectWords, setIncorrectWords] = useState<Translation[]>([]);
 
   useEffect(() => {
     setRemainingWords(translations[language]);
     selectRandomWord(translations[language]);
   }, [language]);
 
-  const selectRandomWord = (words) => {
+  const selectRandomWord = (words: Translation[]) => {
     if (words.length === 0) {
       words = translations[language];
     }
@@ -33,7 +42,7 @@ const Card: React.FC<CardProps> = ({ language }) => {
     setIsFlipped(!isFlipped);
   };
 
-  const handleNextCard = (isCorrect) => {
+  const handleNextCard = (isCorrect: boolean) => {
     if (isCorrect) {
       setCorrectWords([...correctWords, wordPair]);
     } else {
@@ -56,12 +65,8 @@ const Card: React.FC<CardProps> = ({ language }) => {
           </>
         </FlipAnimation>
       </div>
-      <button onClick={() => handleNextCard(true)} className="next-button">
-        Got it Right
-      </button>
-      <button onClick={() => handleNextCard(false)} className="next-button">
-        Got it Wrong
-      </button>
+      <button onClick={() => handleNextCard(true)}>Correct</button>
+      <button onClick={() => handleNextCard(false)}>Incorrect</button>
     </div>
   );
 };
