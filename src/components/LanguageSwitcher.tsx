@@ -1,25 +1,19 @@
 import React from 'react';
 
 interface LanguageSwitcherProps {
-  currentLanguage: string;
-  setLanguage: React.Dispatch<React.SetStateAction<string>>;
+  currentLanguage: 'tr' | 'en';
+  setLanguage: React.Dispatch<React.SetStateAction<'tr' | 'en'>>;
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLanguage, setLanguage }) => {
-
-  const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(event.target.value);
-  };
-
   return (
-    <div className="language-switcher">
-      <label htmlFor="language-select" className="mr-2">Select Language:</label>
-      <select id="language-select" value={currentLanguage} onChange={handleLanguageChange}>
-        <option value="tr">Turkish</option>
-        <option value="en">English</option>
-        {/* <option value="es">Spanish</option> */}
-        {/* Add more languages as needed */}
-      </select>
+    <div>
+      <button onClick={() => setLanguage('tr')} disabled={currentLanguage === 'tr'}>
+        Turkish
+      </button>
+      <button onClick={() => setLanguage('en')} disabled={currentLanguage === 'en'}>
+        English
+      </button>
     </div>
   );
 };
