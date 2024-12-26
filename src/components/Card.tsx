@@ -14,21 +14,25 @@ interface Translation {
 }
 
 interface Translations {
-  [key: string]: Translation[];
+  [key: string]: {
+    [category: string]: Translation[];
+  };
 }
 
 const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [wordPair, setWordPair] = useState<Translation>({ word: '', translation: '' });
-  const [remainingWords, setRemainingWords] = useState<Translation[]>(translations[language]);
+  const [remainingWords, setRemainingWords] = useState<Translation[]>([]);
   const [correctWords, setCorrectWords] = useState<Translation[]>([]);
   const [incorrectWords, setIncorrectWords] = useState<Translation[]>([]);
   const [isPracticeMode, setIsPracticeMode] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals']);
 
   useEffect(() => {
-    setRemainingWords(translations[language]);
-    selectRandomWord(translations[language]);
-  }, [language]);
+    const words = selectedCategories.flatMap(category => translations[language][category]);
+    setRemainingWords(words);
+    selectRandomWord(words);
+  }, [language, selectedCategories]);
 
   const selectRandomWord = (words: Translation[]) => {
     if (words.length === 0) {
@@ -76,8 +80,17 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
     setIsPracticeMode(false);
     setCorrectWords([]);
     setIncorrectWords([]);
-    setRemainingWords(translations[language]);
-    selectRandomWord(translations[language]);
+    const words = selectedCategories.flatMap(category => translations[language][category]);
+    setRemainingWords(words);
+    selectRandomWord(words);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories(prevCategories =>
+      prevCategories.includes(category)
+        ? prevCategories.filter(cat => cat !== category)
+        : [...prevCategories, category]
+    );
   };
 
   const totalWords = correctWords.length + incorrectWords.length + remainingWords.length;
@@ -87,6 +100,75 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
 
   return (
     <div className="card-container">
+      <div className="category-selector">
+        <label>Select Categories: </label>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('greetings')}
+              onChange={() => handleCategoryChange('greetings')}
+            />
+            Greetings
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('objects')}
+              onChange={() => handleCategoryChange('objects')}
+            />
+            Objects
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('animals')}
+              onChange={() => handleCategoryChange('animals')}
+            />
+            Animals
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('weather')}
+              onChange={() => handleCategoryChange('weather')}
+            />
+            Weather
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('emotions')}
+              onChange={() => handleCategoryChange('emotions')}
+            />
+            Emotions
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('colors')}
+              onChange={() => handleCategoryChange('colors')}
+            />
+            Colors
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('food')}
+              onChange={() => handleCategoryChange('food')}
+            />
+            Food
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes('professions')}
+              onChange={() => handleCategoryChange('professions')}
+            />
+            Professions
+          </label>
+        </div>
+      </div>
       <div className="card" onClick={handleClick}>
         <FlipAnimation isFlipped={isFlipped}>
           <>
