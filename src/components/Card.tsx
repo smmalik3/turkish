@@ -4,23 +4,26 @@ import translations from '../utils/translations';
 
 interface CardProps {
   language: 'tr' | 'en';
+  showImages: boolean;
 }
 
 interface Translation {
   word: string;
   translation: string;
+  image?: string; // Make image optional
 }
 
 interface Translations {
   [key: string]: Translation[];
 }
 
-const Card: React.FC<CardProps> = ({ language }) => {
+const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [wordPair, setWordPair] = useState<Translation>({ word: '', translation: '' });
   const [remainingWords, setRemainingWords] = useState<Translation[]>(translations[language]);
   const [correctWords, setCorrectWords] = useState<Translation[]>([]);
   const [incorrectWords, setIncorrectWords] = useState<Translation[]>([]);
+  const [isPracticeMode, setIsPracticeMode] = useState(false);
 
   useEffect(() => {
     setRemainingWords(translations[language]);
@@ -29,7 +32,22 @@ const Card: React.FC<CardProps> = ({ language }) => {
 
   const selectRandomWord = (words: Translation[]) => {
     if (words.length === 0) {
-      words = translations[language];
+      if (isPracticeMode) {
+        alert('You have completed practicing the incorrect words.');
+        resetApp();
+      } else {
+        const practiceIncorrect = window.confirm('Would you like to practice the words you got incorrect?');
+        if (practiceIncorrect) {
+          setIsPracticeMode(true);
+          setRemainingWords(incorrectWords);
+          setCorrectWords([]);
+          setIncorrectWords([]);
+          selectRandomWord(incorrectWords);
+        } else {
+          resetApp();
+        }
+      }
+      return;
     }
     const randomIndex = Math.floor(Math.random() * words.length);
     const selectedWord = words[randomIndex];
@@ -51,6 +69,14 @@ const Card: React.FC<CardProps> = ({ language }) => {
     selectRandomWord(remainingWords);
   };
 
+  const resetApp = () => {
+    setIsPracticeMode(false);
+    setCorrectWords([]);
+    setIncorrectWords([]);
+    setRemainingWords(translations[language]);
+    selectRandomWord(translations[language]);
+  };
+
   const totalWords = correctWords.length + incorrectWords.length + remainingWords.length;
   const correctPercentage = ((correctWords.length / totalWords) * 100).toFixed(2);
   const incorrectPercentage = ((incorrectWords.length / totalWords) * 100).toFixed(2);
@@ -62,10 +88,14 @@ const Card: React.FC<CardProps> = ({ language }) => {
         <FlipAnimation isFlipped={isFlipped}>
           <>
             <div className="card-front">
-              {wordPair.word}
+              {showImages && wordPair.image ? (
+                <img src={wordPair.image} alt={wordPair.word} className="card-image" />
+              ) : (
+                <span>{wordPair.translation}</span>
+              )}
             </div>
             <div className="card-back">
-              {wordPair.translation}
+              {wordPair.word}
             </div>
           </>
         </FlipAnimation>

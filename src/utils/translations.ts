@@ -1,6 +1,6 @@
 export const translations = {
   tr: [
-    { word: "Merhaba", translation: "Hello" },
+    { word: "Merhaba", translation: "Hello", image: '/images/merhaba.png'},
     { word: "Kitap", translation: "Book" },
     { word: "Ev", translation: "House" },
     { word: "Araba", translation: "Car" },
@@ -22,7 +22,7 @@ export const translations = {
     { word: "Bulut", translation: "Cloud" },
   ],
   en: [
-    { word: "Hello", translation: "Merhaba" },
+    { word: "Hello", translation: "Merhaba", image: '/images/merhaba.png' },
     { word: "Book", translation: "Kitap" },
     { word: "House", translation: "Ev" },
     { word: "Car", translation: "Araba" },
