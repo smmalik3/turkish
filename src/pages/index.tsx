@@ -10,18 +10,21 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
       <NavMenu />
-      <h1 className="text-2xl font-bold mb-4">Turkish Flashcard Game</h1>
-      <LanguageSwitcher currentLanguage={language} setLanguage={setLanguage} />
-      <div className="mb-4">
-        <label className="mr-2">Show Images</label>
+      <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Turkish Flashcard Game</h1>
+      <div className="mb-6">
+        <LanguageSwitcher currentLanguage={language} setLanguage={setLanguage} />
+      </div>
+      <div className="mb-6 flex items-center">
+        <label className="mr-2 text-lg font-medium text-gray-700">Show Images</label>
         <input
           type="checkbox"
           checked={showImages}
           onChange={() => setShowImages(!showImages)}
+          className="form-checkbox h-5 w-5 text-blue-600"
         />
       </div>
       <div className="flex justify-center w-full">
-        <div className="flex justify-center w-full">
+        <div className="max-w-md w-full">
           <Card language={language} showImages={showImages} />
         </div>
       </div>
