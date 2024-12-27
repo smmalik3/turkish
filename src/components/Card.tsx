@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions']);
 
   useEffect(() => {
-    const words = selectedCategories.flatMap(category => translations[language as keyof typeof translations][category as keyof typeof translations[language]]);
+    const words = selectedCategories.flatMap(category => translations[typeof language as keyof typeof translations][category as keyof typeof translations[language]]);
     setRemainingWords(words);
     selectRandomWord(words);
   }, [language, selectedCategories]);
