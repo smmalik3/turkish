@@ -59,7 +59,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
     setRemainingWords(words);
     selectRandomWord(words);
   };
-  
+
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
