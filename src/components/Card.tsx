@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FlipAnimation from './FlipAnimation';
-import translations, { Translation } from '../utils/translations';
+import translations, { Translation }  from '../utils/translations';
 
 interface CardProps {
   language: 'tr' | 'en';
@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions']);
 
   useEffect(() => {
-    const words = selectedCategories.flatMap(category => translations[typeof language as keyof typeof translations][category as keyof typeof translations[language]]);
+    const words = selectedCategories.flatMap(category => translations[language][category]);
     setRemainingWords(words);
     selectRandomWord(words);
   }, [language, selectedCategories]);
@@ -51,15 +51,6 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
     setIsFlipped(false); // Reset flip state when moving to the next card
   };
 
-  const resetApp = () => {
-    setIsPracticeMode(false);
-    setCorrectWords([]);
-    setIncorrectWords([]);
-    const words = selectedCategories.flatMap(category => translations[language as keyof typeof translations][category as keyof typeof translations[language]]);
-    setRemainingWords(words);
-    selectRandomWord(words);
-  };
-
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
@@ -71,6 +62,23 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
       setIncorrectWords([...incorrectWords, wordPair]);
     }
     selectRandomWord(remainingWords);
+  };
+
+  const resetApp = () => {
+    setIsPracticeMode(false);
+    setCorrectWords([]);
+    setIncorrectWords([]);
+    const words = selectedCategories.flatMap(category => translations[language][category]);
+    setRemainingWords(words);
+    selectRandomWord(words);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategories(prevCategories =>
+      prevCategories.includes(category)
+        ? prevCategories.filter(cat => cat !== category)
+        : [...prevCategories, category]
+    );
   };
 
   const totalWords = correctWords.length + incorrectWords.length + remainingWords.length;
