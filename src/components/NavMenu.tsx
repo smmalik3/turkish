@@ -15,6 +15,11 @@ const NavMenu: React.FC = () => {
             Fill in the Blanks
           </Link>
         </li>
+        <li>
+          <Link href="/conversation" className="text-white hover:text-gray-400">
+            Conversation
+          </Link>
+        </li>
         {/* Add more links as needed */}
       </ul>
     </nav>
