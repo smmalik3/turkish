@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import FlipAnimation from './FlipAnimation';
-import translations from '../utils/translations';
+import translations, { Translation }  from '../utils/translations';
 
 interface CardProps {
   language: 'tr' | 'en';
   showImages: boolean;
-}
-
-interface Translation {
-  word: string;
-  translation: string;
-  image?: string; // Make image optional
-}
-
-interface Translations {
-  [key: string]: {
-    [category: string]: Translation[];
-  };
 }
 
 const Card: React.FC<CardProps> = ({ language, showImages }) => {
@@ -26,7 +14,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [correctWords, setCorrectWords] = useState<Translation[]>([]);
   const [incorrectWords, setIncorrectWords] = useState<Translation[]>([]);
   const [isPracticeMode, setIsPracticeMode] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions']);
 
   useEffect(() => {
     const words = selectedCategories.flatMap(category => translations[language][category]);

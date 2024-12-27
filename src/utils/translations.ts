@@ -1,4 +1,16 @@
-export const translations = {
+export interface Translation {
+  word: string;
+  translation: string;
+  image?: string; // Make image optional
+}
+
+export interface Translations {
+  [key: string]: {
+    [category: string]: Translation[];
+  };
+}
+
+const translations: Translations = {
   tr: { greetings: [
     { word: "Merhaba", translation: "Hello", image: '/images/merhaba.png'},
   ],
@@ -39,7 +51,7 @@ export const translations = {
     { word: "Kırmızı", translation: "Red", image: '/images/kırmızı.png' },
   ],
   food: [
-    
+
   ],
   professions: [
 
