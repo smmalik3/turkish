@@ -87,57 +87,59 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const progressPercentage = ((remainingWords.length / totalWords) * 100).toFixed(2);
 
   return (
-    <div className="card-container p-4 bg-white shadow-lg rounded-lg">
-      <div className="category-selector mb-4">
-        <label className="block text-gray-700 font-bold mb-2">Select Categories:</label>
-        <div className="flex flex-wrap gap-2">
-          {['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions'].map(category => (
-            <label key={category} className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={selectedCategories.includes(category)}
-                onChange={() => setSelectedCategories(prevCategories =>
-                  prevCategories.includes(category)
-                    ? prevCategories.filter(cat => cat !== category)
-                    : [...prevCategories, category]
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+      <div className="card-container p-4 bg-white shadow-lg rounded-lg">
+        <div className="category-selector mb-4">
+          <label className="block text-gray-700 font-bold mb-2">Select Categories:</label>
+          <div className="flex flex-wrap gap-2">
+            {['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions'].map(category => (
+              <label key={category} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(category)}
+                  onChange={() => setSelectedCategories(prevCategories =>
+                    prevCategories.includes(category)
+                      ? prevCategories.filter(cat => cat !== category)
+                      : [...prevCategories, category]
+                  )}
+                  className="form-checkbox h-5 w-5 text-blue-600"
+                />
+                <span className="text-gray-700">{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="card bg-blue-100 p-4 rounded-lg shadow-md" onClick={handleClick}>
+          <FlipAnimation isFlipped={isFlipped}>
+            <>
+              <div className="card-front flex items-center justify-center h-48">
+                {showImages && wordPair.image ? (
+                  <img src={wordPair.image} alt={wordPair.word} className="card-image max-h-full" />
+                ) : (
+                  <span className="text-2xl font-bold">{wordPair.translation}</span>
                 )}
-                className="form-checkbox h-5 w-5 text-blue-600"
-              />
-              <span className="text-gray-700">{category.charAt(0).toUpperCase() + category.slice(1)}</span>
-            </label>
-          ))}
+              </div>
+              <div className="card-back flex items-center justify-center h-48">
+                <span className="text-2xl font-bold">{wordPair.word}</span>
+              </div>
+            </>
+          </FlipAnimation>
         </div>
-      </div>
-      <div className="card bg-blue-100 p-4 rounded-lg shadow-md" onClick={handleClick}>
-        <FlipAnimation isFlipped={isFlipped}>
-          <>
-            <div className="card-front flex items-center justify-center h-48">
-              {showImages && wordPair.image ? (
-                <img src={wordPair.image} alt={wordPair.word} className="card-image max-h-full" />
-              ) : (
-                <span className="text-2xl font-bold">{wordPair.translation}</span>
-              )}
-            </div>
-            <div className="card-back flex items-center justify-center h-48">
-              <span className="text-2xl font-bold">{wordPair.word}</span>
-            </div>
-          </>
-        </FlipAnimation>
-      </div>
-      <div className="mt-4 flex space-x-4">
-        <button onClick={() => handleNextCard(true)} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Correct</button>
-        <button onClick={() => handleNextCard(false)} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Incorrect</button>
-      </div>
+        <div className="mt-4 flex space-x-4">
+          <button onClick={() => handleNextCard(true)} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Correct</button>
+          <button onClick={() => handleNextCard(false)} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Incorrect</button>
+        </div>
 
-      <div className="stats mt-4">
-        <div className="correct text-green-700 font-bold">
-          Correct: {correctWords.length} / {totalWords} ({correctPercentage}%)
-        </div>
-        <div className="incorrect text-red-700 font-bold">
-          Incorrect: {incorrectWords.length} / {totalWords} ({incorrectPercentage}%)
-        </div>
-        <div className="progress-bar bg-gray-200 rounded-full h-4 mt-2">
-          <div className="progress bg-blue-500 h-4 rounded-full" style={{ width: `${progressPercentage}%` }}></div>
+        <div className="stats mt-4">
+          <div className="correct text-green-700 font-bold">
+            Correct: {correctWords.length} / {totalWords} ({correctPercentage}%)
+          </div>
+          <div className="incorrect text-red-700 font-bold">
+            Incorrect: {incorrectWords.length} / {totalWords} ({incorrectPercentage}%)
+          </div>
+          <div className="progress-bar bg-gray-200 rounded-full h-4 mt-2">
+            <div className="progress bg-blue-500 h-4 rounded-full" style={{ width: `${progressPercentage}%` }}></div>
+          </div>
         </div>
       </div>
     </div>

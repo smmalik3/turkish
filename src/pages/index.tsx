@@ -8,7 +8,7 @@ export default function Home() {
   const [showImages, setShowImages] = useState(true); // State to toggle between images and words
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
+    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
       <NavMenu />
       <h1 className="text-2xl font-bold mb-4">Turkish Flashcard Game</h1>
       <LanguageSwitcher currentLanguage={language} setLanguage={setLanguage} />
@@ -21,9 +21,8 @@ export default function Home() {
         />
       </div>
       <div className="flex justify-center w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex justify-center w-full">
           <Card language={language} showImages={showImages} />
-          {/* Add more cards as needed */}
         </div>
       </div>
     </div>
