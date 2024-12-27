@@ -128,7 +128,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore .DS_Store files
 .DS_Store
-public/.DS_Store
-public/images/.DS_Store
-*.DS_Store
+.DS_Store?
