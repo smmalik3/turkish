@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NavMenu from '../components/NavMenu';
 
 const FillInTheBlanks: React.FC = () => {
-  const [answers, setAnswers] = useState<string[]>(Array(3).fill(''));
+  const [answers, setAnswers] = useState<string[]>(Array(8).fill(''));
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (index: number, value: string) => {
@@ -35,6 +35,31 @@ const FillInTheBlanks: React.FC = () => {
           value={answers[2]}
           onChange={(e) => handleChange(2, e.target.value)}
           className="border-b-2 border-gray-500 focus:outline-none"
+        />. Mesleğim <input
+          type="text"
+          value={answers[3]}
+          onChange={(e) => handleChange(3, e.target.value)}
+          className="border-b-2 border-gray-500 focus:outline-none"
+        />. Ben <input
+          type="text"
+          value={answers[4]}
+          onChange={(e) => handleChange(4, e.target.value)}
+          className="border-b-2 border-gray-500 focus:outline-none"
+        />'de yaşıyorum. Ben <input
+          type="text"
+          value={answers[5]}
+          onChange={(e) => handleChange(5, e.target.value)}
+          className="border-b-2 border-gray-500 focus:outline-none"
+        />'den geliyorum. Bugün hava <input
+          type="text"
+          value={answers[6]}
+          onChange={(e) => handleChange(6, e.target.value)}
+          className="border-b-2 border-gray-500 focus:outline-none"
+        />. Ailem <input
+          type="text"
+          value={answers[7]}
+          onChange={(e) => handleChange(7, e.target.value)}
+          className="border-b-2 border-gray-500 focus:outline-none"
         />.
       </p>
       <button
@@ -45,10 +70,15 @@ const FillInTheBlanks: React.FC = () => {
       </button>
       {isSubmitted && (
         <div className="mt-4">
-          <h2 className="text-xl font-bold">Your Answers:</h2>
+          <h2 className="text-xl font-bold">Your Responses:</h2>
           <p>Adım: {answers[0]}</p>
           <p>Yaşım: {answers[1]}</p>
           <p>En sevdiğim renk: {answers[2]}</p>
+          <p>Mesleğim: {answers[3]}</p>
+          <p>Yaşadığım yer: {answers[4]}</p>
+          <p>Geldiğim yer: {answers[5]}</p>
+          <p>Bugün hava: {answers[6]}</p>
+          <p>Ailem: {answers[7]}</p>
         </div>
       )}
     </div>
