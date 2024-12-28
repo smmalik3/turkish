@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import React, { useState, useEffect, useRef } from 'react';
+import { DndProvider, useDrag, useDrop, ConnectDragSource, ConnectDropTarget } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import NavMenu from '../components/NavMenu';
 
@@ -33,6 +33,7 @@ interface DraggableWordProps {
 }
 
 const DraggableWord: React.FC<DraggableWordProps> = ({ word, type, isMatched }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.WORD,
     item: { id: word.id, type },
@@ -41,9 +42,11 @@ const DraggableWord: React.FC<DraggableWordProps> = ({ word, type, isMatched }) 
     }),
   }));
 
+  drag(ref);
+
   return (
     <div
-      ref={drag}
+      ref={ref}
       className={`p-2 m-2 rounded cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'} ${isMatched ? 'bg-gray-400 text-gray-700' : 'bg-blue-500 text-white'}`}
     >
       {type === 'turkish' ? word.turkish : <img src={word.image} alt={word.english} className="h-16 w-16" />}
@@ -58,6 +61,7 @@ interface DroppableAreaProps {
 }
 
 const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.WORD,
     drop: (item) => onDrop(item, word),
@@ -66,9 +70,11 @@ const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect }
     }),
   }));
 
+  drop(ref);
+
   return (
     <div
-      ref={drop}
+      ref={ref}
       className={`p-4 m-2 border-2 border-dashed rounded ${isOver ? 'border-green-500' : isCorrect === null ? 'border-gray-500' : isCorrect ? 'border-green-500' : 'border-red-500'}`}
     >
       {word.english}
