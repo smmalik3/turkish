@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import NavMenu from '../components/NavMenu';
 
 interface Word {
@@ -113,9 +114,13 @@ const MatchingGame: React.FC = () => {
     }
   };
 
+  const isTouchDevice = () => {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  };
+
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
+    <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
         <NavMenu />
         <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Turkish Matching Game</h1>
         <div className="text-2xl font-bold mb-6 text-center text-red-600">Time Left: {timeLeft}s</div>
@@ -137,9 +142,9 @@ const MatchingGame: React.FC = () => {
             </div>
           </>
         )}
-        <div className="mt-6">
+        <div className="mt-6 w-full max-w-md">
           <h2 className="text-2xl font-bold text-center text-green-600">Matched Words</h2>
-          <ul>
+          <ul className="list-disc list-inside">
             {matchedWords.map((id) => {
               const word = words.find((w) => w.id === id);
               return <li key={id} className="text-lg text-gray-700">{word?.turkish} - {word?.english}</li>;
