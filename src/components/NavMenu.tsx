@@ -12,12 +12,17 @@ const NavMenu: React.FC = () => {
         </li>
         <li>
           <Link href="/fill-in-the-blanks" className="text-white hover:text-gray-400">
-            Fill in the Blanks
+            Blanks
           </Link>
         </li>
         <li>
           <Link href="/conversation" className="text-white hover:text-gray-400">
             Conversation
+          </Link>
+        </li>
+        <li>
+          <Link href="/matching-game" className="text-white hover:text-gray-400">
+            Matching
           </Link>
         </li>
         {/* Add more links as needed */}
