@@ -89,6 +89,13 @@ const MatchingGame: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(60); // 60 seconds timer
   const [gameOver, setGameOver] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }
+  }, []);
 
   useEffect(() => {
     if (timeLeft > 0 && !gameComplete) {
@@ -114,12 +121,8 @@ const MatchingGame: React.FC = () => {
     }
   };
 
-  const isTouchDevice = () => {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  };
-
   return (
-    <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
+    <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
         <NavMenu />
         <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Turkish Matching Game</h1>
