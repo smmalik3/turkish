@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { DndProvider, useDrag, useDrop, ConnectDragSource, ConnectDropTarget } from 'react-dnd';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import NavMenu from '../components/NavMenu';
 
@@ -62,13 +62,13 @@ interface DroppableAreaProps {
 
 const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.WORD,
-    drop: (item) => onDrop(item, word),
+    drop: (item: { id: number; type: string }) => onDrop(item, word),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
-  }));
+  });
 
   drop(ref);
 
