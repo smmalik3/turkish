@@ -42,7 +42,7 @@ const Conversation = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
       <NavMenu />
-      <h1 className="text-3xl font-bold mb-6">Conversation Practice</h1>
+      <h1 className="text-4xl font-bold mb-6 pt-10 text-center text-blue-600">Conversation Practice</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
         <div className="mb-6">
           {conversation.map((line, index) => (

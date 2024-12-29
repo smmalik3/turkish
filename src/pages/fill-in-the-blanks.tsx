@@ -18,7 +18,7 @@ const FillInTheBlanks: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
       <NavMenu />
-      <h1 className="text-2xl font-bold mb-4">Fill in the Blanks</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Fill in the Blanks</h1>
       <p>
         Merhaba, benim adım <input
           type="text"
