@@ -7,7 +7,7 @@ const conversation = [
   { speaker: 'Ali', text: 'Ben İstanbulluyum. Sen nerelisin?' },
   { speaker: 'Ayşe', text: 'Ben de İstanbulluyum. Kaç yaşındasın?' },
   { speaker: 'Ali', text: 'Ben yirmi yaşındayım. Sen kaç yaşındasın?' },
-  { speaker: 'Ayşe', text: 'Ben de yirmi yaşındayım. Ne yaparsın?' },
+  { speaker: 'Ayşe', text: 'Ben de yirmi yaşındayım. Senin mesleğin ne?' },
   { speaker: 'Ali', text: 'Ben öğrenciyim. Sen ne yaparsın?' },
   { speaker: 'Ayşe', text: 'Ben de öğrenciyim. Hangi hobilerden hoşlanırsın?' },
   { speaker: 'Ali', text: 'Kitap okumayı ve yüzmeyi seviyorum. Senin hobilerin neler?' },
@@ -16,7 +16,7 @@ const conversation = [
 
 const questions = [
   { question: 'What is Ayşe\'s hobby?', answer: ['resim yapmayı', 'müzik dinlemeyi'] },
-  { question: 'Where is Ali from?', answer: ['Istanbul'] },
+  { question: 'Where is Ali from?', answer: ['Istanbul', 'Istanbullu', 'istanbul', 'istanbullu'] },
   { question: 'How old is Ayşe?', answer: ['yirmi', '20'] },
   { question: 'What is Ali\'s profession?', answer: ['öğrenci'] },
   { question: 'Ali enjoys reading books and what else?', answer: ['yüzmek'] },
