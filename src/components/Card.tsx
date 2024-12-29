@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
   const [correctWords, setCorrectWords] = useState<Translation[]>([]);
   const [incorrectWords, setIncorrectWords] = useState<Translation[]>([]);
   const [isPracticeMode, setIsPracticeMode] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions', 'adjectives']);
 
   useEffect(() => {
     const words = selectedCategories.flatMap(category => translations[language][category]);

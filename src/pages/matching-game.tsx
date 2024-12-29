@@ -36,7 +36,7 @@ const initialWords: Word[] = [
   { id: 22, turkish: 'Çatal', english: 'Fork', image: '' },
   { id: 23, turkish: 'Bıçak', english: 'Knife', image: '' },
   { id: 24, turkish: 'Televizyon', english: 'Television', image: '' },
-  { id: 25, turkish: 'Bilgisayar', english: 'Computer', image: '' },
+  { id: 25, turkish: 'Bilgisayar', english: 'Computer', image: '/images/bilgisayar.png' },
   { id: 26, turkish: 'Klavye', english: 'Keyboard', image: '' },
   { id: 27, turkish: 'Fare', english: 'Mouse', image: '' },
   { id: 28, turkish: 'Kulaklık', english: 'Headphones', image: '' },
@@ -60,7 +60,7 @@ const initialWords: Word[] = [
   { id: 46, turkish: 'Pencere', english: 'Window', image: '/images/pencere.png' },
   { id: 47, turkish: 'Kapı', english: 'Door', image: '/images/kapı.png' },
   { id: 48, turkish: 'Çiçek', english: 'Flower', image: '/images/çiçek.png' },
-  { id: 49, turkish: 'Ağaç', english: 'Tree', image: '/images/ağaç.png' }
+  { id: 49, turkish: 'Ağaç', english: 'Tree', image: '/images/ağaç.png' },
 ];
 
 const ItemTypes = {
@@ -117,7 +117,7 @@ const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect, 
   return (
     <div
       ref={ref}
-      className={`p-4 m-2 border-2 border-dashed rounded ${isOver ? 'border-green-500' : isCorrect === null ? 'border-gray-500' : isCorrect ? 'border-green-500' : 'border-red-500'}`}
+      className={`p-4 m-2 border-2 border-dashed rounded bg-white ${isOver ? 'border-green-500' : isCorrect === null ? 'border-gray-500' : isCorrect ? 'border-green-500' : 'border-red-500'}`}
     >
       {showImages && word.image ? (
         <img src={word.image} alt={word.english} className="h-16 w-16 object-contain" />
@@ -147,6 +147,8 @@ const MatchingGame: React.FC = () => {
   const [gameComplete, setGameComplete] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [showImages, setShowImages] = useState(true);
+  const [timerEnabled, setTimerEnabled] = useState(true);
+  const [selectedTime, setSelectedTime] = useState(60);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -157,13 +159,13 @@ const MatchingGame: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (timeLeft > 0 && !gameComplete) {
+    if (timerEnabled && timeLeft > 0 && !gameComplete) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setGameOver(true);
     }
-  }, [timeLeft, gameComplete]);
+  }, [timeLeft, gameComplete, timerEnabled]);
 
   useEffect(() => {
     if (matchedWords.length === draggableWords.length && draggableWords.length > 0) {
@@ -184,12 +186,47 @@ const MatchingGame: React.FC = () => {
     setShowImages(!showImages);
   };
 
+  const handleTimerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTimerEnabled(event.target.checked);
+    if (!event.target.checked) {
+      setTimeLeft(selectedTime);
+    }
+  };
+
+  const handleTimeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const time = parseInt(event.target.value, 10);
+    setSelectedTime(time);
+    setTimeLeft(time);
+  };
+
   return (
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100 pt-20">
         <NavMenu />
         <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Turkish Matching Game</h1>
-        <div className="text-2xl font-bold mb-6 text-center text-red-600">Time Left: {timeLeft}s</div>
+        <div className="flex items-center mb-6">
+          <input
+            type="checkbox"
+            checked={timerEnabled}
+            onChange={handleTimerChange}
+            className="mr-2"
+          />
+          <label className="mr-4">Enable Timer</label>
+          <select
+            value={selectedTime}
+            onChange={handleTimeSelect}
+            disabled={!timerEnabled}
+            className="px-2 py-1 border rounded"
+          >
+            <option value={30}>30s</option>
+            <option value={60}>60s</option>
+            <option value={90}>90s</option>
+            <option value={120}>120s</option>
+          </select>
+        </div>
+        {timerEnabled && (
+          <div className="text-2xl font-bold mb-6 text-center text-red-600">Time Left: {timeLeft}s</div>
+        )}
         <button
           onClick={toggleImages}
           className="mb-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
