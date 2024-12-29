@@ -61,6 +61,7 @@ const initialWords: Word[] = [
   { id: 47, turkish: 'Kapı', english: 'Door', image: '/images/kapı.png' },
   { id: 48, turkish: 'Çiçek', english: 'Flower', image: '/images/çiçek.png' },
   { id: 49, turkish: 'Ağaç', english: 'Tree', image: '/images/ağaç.png' },
+  { id: 50, turkish: 'Kahverengi', english: 'Brown', image: '/images/kahverengi.png' },
 ];
 
 const ItemTypes = {
