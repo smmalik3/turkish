@@ -72,9 +72,10 @@ interface DraggableWordProps {
   word: Word;
   type: 'turkish' | 'image';
   isMatched: boolean;
+  language: 'turkish' | 'english'; // Add the language prop
 }
 
-const DraggableWord: React.FC<DraggableWordProps> = ({ word, type, isMatched }) => {
+const DraggableWord: React.FC<DraggableWordProps> = ({ word, type, isMatched, language }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.WORD,
@@ -91,7 +92,7 @@ const DraggableWord: React.FC<DraggableWordProps> = ({ word, type, isMatched }) 
       ref={ref}
       className={`p-2 m-2 rounded cursor-pointer ${isDragging ? 'opacity-50' : 'opacity-100'} ${isMatched ? 'bg-gray-400 text-gray-700' : 'bg-blue-500 text-white'}`}
     >
-      {word.turkish}
+      {language === 'turkish' ? word.turkish : word.english}
     </div>
   );
 };
@@ -101,9 +102,10 @@ interface DroppableAreaProps {
   onDrop: (item: { id: number; type: string }, targetWord: Word) => void;
   isCorrect: boolean | null;
   showImages: boolean;
+  language: 'turkish' | 'english'; // Add the language prop
 }
 
-const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect, showImages }) => {
+const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect, showImages, language }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.WORD,
@@ -121,9 +123,9 @@ const DroppableArea: React.FC<DroppableAreaProps> = ({ word, onDrop, isCorrect, 
       className={`p-4 m-2 border-2 border-dashed rounded bg-white ${isOver ? 'border-green-500' : isCorrect === null ? 'border-gray-500' : isCorrect ? 'border-green-500' : 'border-red-500'}`}
     >
       {showImages && word.image ? (
-        <img src={word.image} alt={word.english} className="h-16 w-16 object-contain" />
+        <img src={word.image} alt={language === 'turkish' ?  word.english : word.turkish} className="h-16 w-16 object-contain" />
       ) : (
-        <span className="text-lg">{word.english}</span>
+        <span className="text-lg">{language === 'turkish' ? word.english : word.turkish}</span>
       )}
     </div>
   );
@@ -150,6 +152,7 @@ const MatchingGame: React.FC = () => {
   const [showImages, setShowImages] = useState(true);
   const [timerEnabled, setTimerEnabled] = useState(true);
   const [selectedTime, setSelectedTime] = useState(60);
+  const [language, setLanguage] = useState<'turkish' | 'english'>('turkish'); // Default language is Turkish
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -200,13 +203,32 @@ const MatchingGame: React.FC = () => {
     setTimeLeft(time);
   };
 
+  const switchLanguage = (lang: 'turkish' | 'english') => {
+    setLanguage(lang);
+  };
+
   return (
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100 pt-20">
         <NavMenu />
-        <h1 className="text-4xl font-bold mb-4 text-center text-blue-600">Matching Game</h1> 
+        
         <div className="w-full max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg mt-4">
-               
+               <div className="mb-4 flex space-x-4 items-center justify-center">
+            <button
+              onClick={() => switchLanguage('turkish')}
+              className={`px-4 py-2 rounded-lg ${language === 'turkish' ? 'bg-gray-400 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+              disabled={language === 'turkish'}
+            >
+              Turkish
+            </button>
+            <button
+              onClick={() => switchLanguage('english')}
+              className={`px-4 py-2 rounded-lg ${language === 'english' ? 'bg-gray-400 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+              disabled={language === 'english'}
+            >
+              English
+            </button>
+          </div>
         <div className="flex items-center mb-6">
           <input
             type="checkbox"
@@ -246,14 +268,14 @@ const MatchingGame: React.FC = () => {
               {draggableWords
                 .filter((word) => !showImages || word.image) // Filter out words without images if showImages is true
                 .map((word) => (
-                  <DraggableWord key={word.id} word={word} type="turkish" isMatched={matchedWords.includes(word.id)} />
+                  <DraggableWord key={word.id} word={word} type="turkish" language={language} isMatched={matchedWords.includes(word.id)} />
                 ))}
             </div>
             <div className="flex flex-wrap justify-center">
               {droppableWords
                 .filter((word) => !showImages || word.image) // Filter out words without images if showImages is true
                 .map((word) => (
-                  <DroppableArea key={word.id} word={word} onDrop={handleDrop} isCorrect={feedback[word.id]} showImages={showImages} />
+                  <DroppableArea key={word.id} word={word} onDrop={handleDrop} language={language} isCorrect={feedback[word.id]} showImages={showImages} />
                 ))}
             </div>
           </>
