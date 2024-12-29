@@ -92,7 +92,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
         <div className="category-selector mb-4">
           <label className="block text-gray-700 font-bold mb-2">Select Categories:</label>
           <div className="flex flex-wrap gap-2">
-            {['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions'].map(category => (
+            {['greetings', 'objects', 'animals', 'weather', 'colors', 'food', 'professions', 'emotions', 'adjectives'].map(category => (
               <label key={category} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
