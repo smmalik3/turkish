@@ -17,8 +17,8 @@ const FillInTheBlanks: React.FC = () => {
     setIsSubmitted(true);
   };
 
-  const switchLanguage = () => {
-    setLanguage(prevLanguage => (prevLanguage === 'tr' ? 'en' : 'tr'));
+  const switchLanguage = (lang: 'tr' | 'en') => {
+    setLanguage(lang);
   };
 
   return (
