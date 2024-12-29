@@ -13,7 +13,7 @@ const NavMenu: React.FC = () => {
       <div className="flex justify-between items-center">
         <div className="flex items-center text-white text-lg">
           <div className="relative h-8 w-8 mr-2">
-            <img className="h-full w-full rounded-full border-2 border-white object-cover" src="/images/turkishFlag.png" alt="Logo" />
+            <img className="h-full w-full rounded-full border-2 border-white object-cover" src="/images/turkishflag.png" alt="Logo" />
           </div>
           Turkish Learning App
         </div>
