@@ -204,7 +204,9 @@ const MatchingGame: React.FC = () => {
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100 pt-20">
         <NavMenu />
-        <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Turkish Matching Game</h1>
+        <h1 className="text-4xl font-bold mb-4 text-center text-blue-600">Matching Game</h1> 
+        <div className="w-full max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg mt-4">
+               
         <div className="flex items-center mb-6">
           <input
             type="checkbox"
@@ -267,6 +269,7 @@ const MatchingGame: React.FC = () => {
             })}
           </ul>
         </div>
+      </div>
       </div>
     </DndProvider>
   );
