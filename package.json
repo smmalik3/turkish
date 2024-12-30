@@ -19,6 +19,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "latest",
+    "react-swipeable": "^7.0.2",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSwipeable } from 'react-swipeable';
 import FlipAnimation from './FlipAnimation';
 import translations, { Translation }  from '../utils/translations';
 
@@ -55,6 +56,19 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
     setIsFlipped(!isFlipped);
   };
 
+  const handleSwipe = (direction: string) => {
+    if (direction === 'Left' || direction === 'Right') {
+      setIsFlipped(!isFlipped);
+    }
+  };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe('Left'),
+    onSwipedRight: () => handleSwipe('Right'),
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
+
   const handleNextCard = (isCorrect: boolean) => {
     if (isCorrect) {
       setCorrectWords([...correctWords, wordPair]);
@@ -109,7 +123,7 @@ const Card: React.FC<CardProps> = ({ language, showImages }) => {
             ))}
           </div>
         </div>
-        <div className="card bg-blue-100 p-4 rounded-lg shadow-md" onClick={handleClick}>
+        <div {...swipeHandlers} className="card bg-blue-100 p-4 rounded-lg shadow-md" onClick={handleClick}>
           <FlipAnimation isFlipped={isFlipped}>
             <>
               <div className="card-front flex items-center justify-center h-48">
