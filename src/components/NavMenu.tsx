@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const NavMenu: React.FC = () => {
@@ -7,6 +7,23 @@ const NavMenu: React.FC = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  useEffect(() => {
+    // Add Google Tag Manager script to the document head
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DN98GJLLFH';
+    document.head.appendChild(script);
+
+    const inlineScript = document.createElement('script');
+    inlineScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DN98GJLLFH');
+    `;
+    document.head.appendChild(inlineScript);
+  }, []);
 
   return (
     <nav className="w-full bg-gray-800 p-4 shadow-lg fixed top-0 z-50">
