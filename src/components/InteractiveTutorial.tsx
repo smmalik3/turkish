@@ -1,3 +1,4 @@
+// TODO: Optimize for mobile
 import React, { useState } from 'react';
 
 const steps = [
@@ -58,11 +59,11 @@ const InteractiveTutorial: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen p-20 bg-gray-100">
+    <div className="flex flex-col items-center min-h-screen p-4 sm:p-20 bg-gray-100">
       <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">
         {steps[currentStep].title}
       </h1>
-      <div className="min-h-[200px] text-lg mb-4 flex items-center justify-center">
+      <div className="min-h-[200px] text-lg mb-4 flex items-center justify-center w-full sm:w-2/3 lg:w-1/2">
         <p className="whitespace-pre-line max-w-2xl text-center">
           {highlightVowels(steps[currentStep].content)}
         </p>
