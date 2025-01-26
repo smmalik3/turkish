@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { checkVowelHarmony } from '../utils/vowelHarmony';
+import { checkVowelHarmony } from './vowelHarmony';
 
 const suffixes = ['lar', 'ler', 'da', 'de', 'dan', 'den'];
 
