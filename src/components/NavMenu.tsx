@@ -47,6 +47,9 @@ const NavMenu: React.FC = () => {
           <Link href="/matching-game" className="text-white hover:text-gray-400">
             Matching
           </Link>
+          <Link href="/vowel-harmony" className="text-white hover:text-gray-400">
+            Vowel Harmony
+          </Link>
         </div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-white focus:outline-none">
@@ -77,6 +80,11 @@ const NavMenu: React.FC = () => {
             <li>
               <Link href="/matching-game" className="text-white hover:text-gray-400">
                 Matching
+              </Link>
+            </li>
+            <li>
+              <Link href="/vowel-harmony" className="text-white hover:text-gray-400">
+                Vowel Harmony
               </Link>
             </li>
           </ul>
