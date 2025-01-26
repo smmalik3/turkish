@@ -1,3 +1,4 @@
+// TODO: Optimize for mobile
 import React, { useState } from 'react';
 import { checkVowelHarmony } from '../utils/vowelHarmony';
 
