@@ -36,7 +36,7 @@ const VowelHarmonyGame: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
+    <div className="flex flex-col items-center min-h-screen p-20 bg-gray-100">
       <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Vowel Harmony Game</h1>
       {words.map((word, index) => (
         <input

@@ -21,3 +21,14 @@ export const checkVowelHarmony = (word: string) => {
     vowelPositions,
   };
 };
+
+export const checkSuffixHarmony = (word: string, suffix: string) => {
+  const wordResult = checkVowelHarmony(word);
+  const suffixResult = checkVowelHarmony(suffix);
+
+  if (wordResult.isHarmonious && suffixResult.isHarmonious) {
+    if (wordResult.hasFrontVowels && suffixResult.hasFrontVowels) return true;
+    if (wordResult.hasBackVowels && suffixResult.hasBackVowels) return true;
+  }
+  return false;
+};
