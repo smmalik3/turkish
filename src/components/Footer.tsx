@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
       <div className="flex justify-between items-center text-white text-sm">
         <p>&copy; 2025 Salman Malik</p>
         <a
-          href="https://www.buymeacoffee.com/salmanmalik"
+          href="https://www.buymeacoffee.com/salmanmalik1"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center space-x-2"
