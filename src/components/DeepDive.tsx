@@ -1,6 +1,7 @@
 // TODO: Optimize for mobile
 import React from 'react';
 import { useRouter } from 'next/router';
+import Footer from './Footer';
 
 const DeepDive: React.FC = () => {
   const router = useRouter();
@@ -100,6 +101,7 @@ const DeepDive: React.FC = () => {
       >
         Back to Top
       </button>
+      <Footer />
     </div>
   );
 };

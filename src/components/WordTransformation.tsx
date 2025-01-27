@@ -1,6 +1,7 @@
 // TODO: Optimize for mobile
 import React, { useState } from 'react';
 import { checkSuffixHarmony, checkVowelHarmony } from '../utils/vowelHarmony';
+import Footer from './Footer';
 
 // Predefined dictionary for translations
 const dictionary: { [key: string]: string } = {
@@ -139,6 +140,7 @@ const WordTransformation: React.FC = () => {
       >
         Next Word
       </button>
+      <Footer />
     </div>
   );
 };

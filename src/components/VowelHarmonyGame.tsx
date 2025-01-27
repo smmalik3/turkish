@@ -1,6 +1,7 @@
 // TODO: Optimize for mobile
 import React, { useState } from 'react';
 import { checkVowelHarmony } from '../utils/vowelHarmony';
+import Footer from './Footer';
 
 const VowelHarmonyGame: React.FC = () => {
   const [words, setWords] = useState<string[]>(['']);
@@ -72,6 +73,7 @@ const VowelHarmonyGame: React.FC = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

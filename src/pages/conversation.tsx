@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavMenu from '../components/NavMenu';
+import Footer from '../components/Footer';
 
 const conversation = {
   turkish: [
@@ -122,6 +123,7 @@ const Conversation = () => {
           Check Answers
         </button>
       </div>
+      <Footer />
     </div>
   );
 };

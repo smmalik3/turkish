@@ -1,5 +1,6 @@
 // TODO: Optimize for mobile
 import React, { useState } from 'react';
+import Footer from './Footer';
 
 const steps = [
   {
@@ -82,6 +83,7 @@ const InteractiveTutorial: React.FC = () => {
           Next
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
