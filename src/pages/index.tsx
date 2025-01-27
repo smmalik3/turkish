@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavMenu from "../components/NavMenu";
 import Card from "../components/Card";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [language, setLanguage] = useState<'tr' | 'en'>("tr"); // Default language is Turkish
@@ -40,6 +41,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

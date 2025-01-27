@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavMenu from '../components/NavMenu';
+import Footer from '../components/Footer';
 
 const FillInTheBlanks: React.FC = () => {
   const [answers, setAnswers] = useState<string[]>(Array(8).fill(''));
@@ -166,6 +167,7 @@ const FillInTheBlanks: React.FC = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

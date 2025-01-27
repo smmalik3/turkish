@@ -3,6 +3,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import NavMenu from '../components/NavMenu';
+import Footer from '../components/Footer';
 
 interface Word {
   id: number;
@@ -209,7 +210,7 @@ const MatchingGame: React.FC = () => {
 
   return (
     <DndProvider backend={isTouchDevice ? TouchBackend : HTML5Backend}>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100 pt-20">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100 pt-20 pb-20">
         <NavMenu />
         <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Matching Game</h1>
         <div className="w-full max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg mt-4">
@@ -312,6 +313,7 @@ const MatchingGame: React.FC = () => {
           </ul>
         </div>
       </div>
+      <Footer />
       </div>
     </DndProvider>
   );

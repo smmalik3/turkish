@@ -1,6 +1,7 @@
 // TODO: Optimize for mobile
 import React, { useState, useEffect } from 'react';
 import { checkSuffixHarmony, checkVowelHarmony } from '../utils/vowelHarmony';
+import Footer from './Footer';
 
 const suffixes = ['lar', 'ler', 'da', 'de', 'dan', 'den'];
 
@@ -101,6 +102,7 @@ const MatchingGame: React.FC = () => {
       <div className="mt-4 text-lg">
         <p>Score: {score} / {wordIndex + 1}</p>
       </div>
+      <Footer />
     </div>
   );
 };
