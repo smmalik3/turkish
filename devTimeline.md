@@ -1,3 +1,5 @@
+Below is a sample table capturing major activities from the provided Implementation Plan image. The “Start Month” and “End Month” columns refer to approximate months on the timeline (Month 1 = project start). Durations and dependencies are based on the flow of tasks shown in the chart.
+
 ┌───────────────────────────────────────────────────────────────┬─────────────┬───────────┬────────────────┬─────────────────────────────────────────────────────┐
 │ Activity/Task                                               │ Start Month │ End Month │ Duration (Mos) │ Key Dependencies                                 │
 ├───────────────────────────────────────────────────────────────┼─────────────┼───────────┼────────────────┼─────────────────────────────────────────────────────┤
@@ -39,3 +41,9 @@
 ├───────────────────────────────────────────────────────────────┼─────────────┼───────────┼────────────────┼─────────────────────────────────────────────────────┤
 │ 19. Post Go‐Live Support                                    │ 12+         │ Ongoing   │ – (Indefinite) │ Production Deployment                             │
 └───────────────────────────────────────────────────────────────┴─────────────┴───────────┴────────────────┴─────────────────────────────────────────────────────┘
+
+Notes:
+• “Duration” values are rounded to the nearest month based on chart estimates.  
+• Some tasks (e.g., ATO activities) overlap with initial activities.  
+• “Dependencies” are indicative of logical sequencing; actual project execution may handle some tasks in parallel.  
+• Post Go‐Live Support (Hypercare) starts around Month 12 and continues as needed.
